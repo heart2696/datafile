@@ -51,15 +51,49 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return bookLists.size();
     }
 
+    public void addItem(BookItemLists book) {
+        bookLists.add(book);
+    }
 
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView title;
+        private TextView author;
+        private TextView description;
+        private ImageView image;
 
-    protected static class ViewHolder extends RecyclerView.ViewHolder{
-        private final RecyclerAdapter binding;
+        private String imgURL;
 
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
 
-        public ViewHolder(HwlayoutBinding binding){
-            super(binding.getRoot());
-            this.binding = binding;
+            title = itemView.findViewById(R.id.texttitle);
+            author = itemView.findViewById(R.id.textauthor);
+            description = itemView.findViewById(R.id.textdescription);
+            image = itemView.findViewById(R.id.image);
+        }
+
+        void onBind(BookItemLists book) {
+            title.setText(book.getTitle());
+            author.setText(book.getAuthor());
+            description.setText(book.getDescription());
+            String imgURL = book.getImage();
+
+            Glide.with(itemView).load(imgURL).into(image);
+
+//        }
+//
+//
+//    }
+//
+//
+//
+//    protected static class ViewHolder extends RecyclerView.ViewHolder{
+//        private final RecyclerAdapter binding;
+//
+//
+//        public ViewHolder(HwlayoutBinding binding){
+//            super(binding.getRoot());
+//            this.binding = binding;
         }
     }
 }
